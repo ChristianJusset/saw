@@ -1,0 +1,405 @@
+## version 
+git --version 
+
+## ayuda de git
+git --help
+
+## configuración de alias
+
+git config --global alias.lg "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+git config --global alias.s status --short
+git config --global alias.s status -sb
+
+
+## configuracion de git
+git config --global user.name "christian"
+git config --global user.email "csanchezquiet@gmail.com"
+git config --global -e
+:wq
+## inicializar git 
+1.- ubicarse en la carpeta donde se va a trabajar el repositorio
+2.- git init
+
+## restaurar los cambios en el git
+eliminar la carpeta .git
+
+## pasos para trabajar con git
+1.- ubicarse en el repositorio
+2.- git init (seguimiento)
+3.- git status
+4.- git add . (stage)
+5.- git commit -m "comentarios"
+6.- git log
+
+
+## ver los cambios que se encuentran en seguimiento o en el stage
+git status
+git s (con alias)
+
+
+## agregar los cambios al stage
+git add index.html
+git add index.html main.html
+git add *.html
+git add folfer/*.html
+git add folfer/ (agregar al stage todos los files que se encuentran en el folder)
+git add .
+
+## realizar el commit
+git commit -m "comentarios"
+
+## agregar al stage y realizar el commit
+solo para los archivos que se encuentran en seguimiento
+
+git commit -am "comentarios del conflicto"
+
+## modificar los comentarios del último commit
+1.- git init
+2.- git add .
+3.- git commit -m "comentarios"
+4.- modificar el último comentarios del commit
+git commit --amend -m "descripción de comentarios"
+
+
+## ver la rama donde se esta trabajando
+git branch
+
+
+## regresar del seguimiento al último commit
+1.- git init
+2.- git add .
+3.- git commit -m "comentarios"
+4.- realizar cambios en algun archivos(no llevarlos al stage)
+5.- revertir los cambios 
+git checkout -- .
+git checkout -- nombreArchivo
+
+
+## regresar del stage al seguimiento
+1.- git init 
+2.- git add .
+3.- regresar del stage a seguimiento 
+git reset
+
+
+## regresar el último commit al stage(se mantienen los cambios)
+1.- git init 
+2.- git add .
+3.- git commit -m "comentarios"
+4.- revertir el último commit:
+git reset --soft HEAD^
+
+## regresar desde un commit especifico al stage(se mantienen los cambios)
+1.- git init 
+2.- git add .
+3.- git commit -m "comentarios"
+4.- revertir a un commit especifico:
+git reset --soft idCommit
+
+
+## regresar desde un commit especifico al seguimiento(se mantienen los cambios)
+1.- git init
+2.- git add .
+3.- git commit -m "comentarios"
+4.- revertir a un commit especifico:
+git reset --mixed idCommit
+
+
+## regresar desde un commit especifico al seguimiento(se eliminan los cambios)
+1.- git init
+2.- git add .
+3.- git commit -m "comentarios"
+4.- revertir a un commit especifico:
+git reset --hard idCommit
+
+
+# ver los viajes de los commit y reset
+git reflog
+git reset --hard idCommit
+
+## cambiar de nombre a un archivo
+git mv ubicacion/nombreArchivo nombreArchivoNuevo
+git status
+git commit -m "comentarios"
+
+## eliminar un archivo
+git rm nombreArchivo
+git status
+git commit -m "comentarios"
+
+
+## ignorar archivos
+1.- agregamos un nuevo archivo .gitignore
+2.- especificamos los archivos que no van ser seguidos
+3.- git add .
+4.- git commit -m "comentarios"
+
+
+## merge fast-forward
+No hay cambios en la rama destino, y si hay cambios en la nueva rama
+
+1.- crear la nueva rama
+git branch nueva-rama
+
+2.- nos ubicamos en la nueva rama
+git checkout nueva-rama
+
+3.- realizamos cambios en la nueva rama
+
+4.- nos ubicamos en la rama destino
+git checkout rama-destino (puede ser master)
+
+5.- realizamos el merge
+git merge nueva-rama
+
+6.- eliminamos la nueva rama
+git branch -d nueva-rama
+
+
+## merge automatico(recursiva)
+hay cambios en la nueva rama y cambios en la rama destino pero no afectan los mismos archivos
+
+1.- crear la nueva rama y automaticamente ubicarnos a la rama creada
+git checkout -b nueva-rama
+
+2.- modificación en la nueva rama archivo index.html
+
+3.- nos ubicamos en la rama destino
+git checkout rama-destino (puede ser master)
+
+4.- modificacion en la rama destino archivo persona.html
+
+5.- realizamos el merge desde la rama destino(puede ser master)
+git merge nueva-rama
+
+6.- los cambios pasaran automaticamente a la rama-destino
+
+7.- eliminamanos la nueva rama
+git branch -d nueva-rama
+
+## merge con conflictos
+
+1.- crear la nueva rama y automaticamente ubicarnos a la rama creada
+git checkout -b nueva-rama
+
+2.- realizamos cambios en la nueva rama (archivo index.html)
+
+3.- nos ubicamos en la rama destino
+git checkout rama-destino
+
+4.- realizamos cambios en la rama destino (mismo archivo index.html)
+
+5.- realizamos el merge desde la rama destino
+git merge nueva-rama
+
+7.- resolvemos los conflictos
+
+8.- agregamos al stage y realizamos el commit
+git commit -am "comentarios del conflicto"
+
+9.- eliminamanos la nueva rama 
+git branch -d nueva-rama
+
+## tags o etiquetas (para marcar realise o versión del proyecto)
+
+v1: version donde ya tiene algunas caracteristicas
+0: version de cambios
+0: version de errores
+
+1.- creacion del tag
+git tag v.0.0  (creacion del tag en el último commit)
+git tag -a v.0.0 idCommit -m "comentarios del tag" (creacion en un commit especifico)
+
+2.- listar tag
+git tag
+
+3.- eliminar tag
+git -d nombreTag
+
+4.- ver informacion adicional del tag 
+git show nombreTag
+
+
+## stash en git
+Los cambios que se realizan en un proyecto dejarlos en memoria para no perderlos
+
+1.- trabajamos en el proyecto(sin hacer commmit, solo en etapa seguimiento)
+2.- hacemos un backup de los cambios
+git stash 
+3.- en el proyecto que se ha dejado lo desplegamos o lo pasamos a otra persona
+4.- retornamos el trabajo avanzando(lo que se dejo en momoria) borramos el stash automaticamente
+git stash pop
+
+## eliminar los stash 
+git stash list
+git stash clear
+
+## rebase
+Actualizar la nueva rama con los cambios realizados en la rama principal
+
+1.- crear una nueva rama
+git branch nueva-rama
+
+2.- modificar la nueva rama
+
+3.- realizamos el commit
+git commit -am "comentarios de los cambios"
+
+4.- pasamos cambios de otras ramas a la rama principal
+
+5.- pasar los cambios de la rama principal a la nueva rama, para ello nos ubicamos en la nueva rama y hacemos el rebase
+git checkout nueva-rama
+git rebase rama-principal
+
+6.- regresamos a la rama principal para hacer el merge
+git checkout rama-principal (main)
+6.- hacer el merge(va hacer un forward)
+git merge nueva-rama
+
+## rebase con el squash para unir commit
+git rebase -i HEAD~3
+
+## Subir un proyecto a un repositorio externo(GitHub)
+1.- creamos un nuevo repositorio en GitHub
+2.- git remote add origin https://github.com/jchristiansanchez/eliminar.git
+3.- git branch -M main
+4.- git push -u origin main
+
+## subir los cambios del git al repositorio externo(GitHub)
+git push
+
+## subir los tag del git al repositorio externo(GitHub)
+git push --tag
+
+## obtener los cambios del repositorio de GitHub
+git pull
+git pull --all
+
+
+## ver los repositorio externos desde el git
+git remote -v 
+
+## Realizar una clonación del repositorio
+Al realizar la clonación se podrá hacer pull o push al repositorio original que se encuentra en GitHub, siempre que el usuario sea colaborador
+
+1.- ir a GitHub y copia la url para clonar
+2.- ubicarnos en una carpeta local donde se va a guardar el repositorio de GitHub
+3.- realizar el clone
+git clone urlGitHub
+4.- ver el historial del proyecto 
+git lg
+
+
+## configurar git para hacer un pull fast forward
+solo pasará los cambios que no tienen conflictos
+
+git config --global pull.ff only
+git config --global -e 
+
+## desactivar el fast-forward
+git pull --no-ff
+
+
+## hacer un pull rebase
+1.- hacer cambio en repositorio de GitHub(archivo index.html)
+2.- hacer el commit en repositorio de GitHub
+3.- regresamos al git y hacemos cambios(archivo index.html)
+4.- hacer el commit en el repositorio de git
+5.- configurar para que acepte cambios con pull.rebase 
+git pull --no-ff
+git config --global pull.rebase true
+6.- realizar el pull para obtener los cambios del GitHub
+git pull
+7.- resolver conflictos
+8.- hacer commit de los conflictos
+9.- git status
+10.- git rebase --continue
+11.- actualizar el repositorio de GitHub
+git push
+
+
+## realizar un fork
+El fork se realiza cuando un usuario no es parte del proyecto pero puede hacer un clon. Al realizar el fork, el proyecto se clona en el repositorio del usuario
+ahí el usuario puede hacer cambios, pull y push a su propio repositorio. Si quiere pasar esos cambios al proyecto original realiza un pull request.
+
+1.- obtener la url del repositorio que no es colaborador de GitHub
+2.- iniciar sesión en su cuenta de GitHub pegar la url y dentro de las configuraciones nos saldra para realizar el fork.
+3.- realizamos el fork y se creará el proyecto en nuestro respositorio personal
+4.- realizar un clon de ese nuevo repositorio en nuestro local
+5.- realizar cambios en ese proyecto
+6.- realizamos el push a ese proyecto en GitHub
+7.- nos ubicamos en el GitHub y damos clic en la opcion de contribuidores/Open pull request
+8.- ahora nos ubicamos en el proyecto inicial y nos mostrará que tenemos un pull request por revisar y aprobar
+ 
+ 
+
+## actualizar el fork
+
+# forma 1 desde el GitHub:
+1.- realizar un fork de la rama principal a un repositorio personal
+2.- realizar clone del proyecto desde el repositorio GitHub personal
+3.- realizar cambios o actualizar el repositorio principal con otros proyectos
+4.- ir al repositorio GitHub personal y actualizar los cambios que se encuentran en el repositorio principal
+hacer clic en Fetch upstream
+hacer clic en Fetch and marge
+ 
+# forma 2 desde el git:
+
+1.- realizar un fork de la rama principal a un repositorio personal
+2.- realizar clone del proyecto desde el repositorio GitHub personal
+3.- nos ubicamos en el proyecto descargado desde el repositorio GitHub personal
+4.- ver la rama del repositorio personal
+git remote -v
+5.- agregar el repositorio principal a nuestro local
+git remote add upstream(cualquier nombre que se la va a dar al repositorio principal en nuestro local) urlProyectoPrincipal
+
+6.- visualizar todos los repositorio
+git remote -v 
+
+7.- obtener los cambios del repositorio principal a nuestro local
+git pull upstream(nombre que se le ha dado al repositorio principal en nuestro local) master(nombre de la rama)
+
+8.- resolver los conflictos
+
+9.- realizar el commit de los conflictos
+git commit -am "comentarios de lso conflictos"
+
+10.- realizar el git push
+
+
+## crear  una nueva rama desde git a GitHub
+1.- creacion de la nueva rama
+git branch nueva-rama
+
+2.- nos ubicamos en la nueva rama
+git checkout nueva-rama
+
+3.- realizamos cambios en la nueva rama
+
+4.- realizamos el commit 
+git commit -am "comentarios de los cambios en la nueva rama"
+
+5.- git push --set-upstream origin nueva-rama
+
+6.- visualizamos en el repositorio que se ha creado una nueva rama 
+
+
+## operaciones en GitHub
+# aciones
+para realizar el despliegue en algún servicio de la nube
+
+# blem en GitHub
+ver el historial del archivo
+
+
+## gitfech
+actualizar las referencias que hay cambios en el GitHub (actualiza los movimientos) pero no realiza el pull, es como listar los cambios pendientes
+
+
+## visualizar todas las ramas(ramas de otros usuarios)
+
+git branch --all
+
+## actualizar las ramas locales, solo ver los que se encuentran activo
+
+git remote prune origin
