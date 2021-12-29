@@ -1,0 +1,173 @@
+# instalar angular cli
+npm install -g @angular/cli
+
+# instalar typescript
+npm install -g typescript
+
+# version de angular cli
+ng --version
+
+# restaurar los paquetes 
+npm i 
+
+# crear nuevo proyecto
+ng new nombreProyecto
+
+# generar un componente
+ng g c paht/nameComponent
+ng g c paht/nameComponent --skipTests
+
+# generar un modulo
+ng g m paht/nameModule
+
+# generar un servicio
+ng g s path/nameServicio
+
+# generar un pipes
+ng g p path/namePipes
+
+# generar una ruta
+ng g m path/nameRouting --flat
+* --flat es para crearlo a nivel de carpeta
+
+# generar un guards
+ng g g auth/guards/auth
+
+# generar un modulo y routing
+ng g m formularioTemplate --routing
+
+# generar directiva
+ng g d path/name
+ 
+# ejecutar el proyecto
+ng serve -o
+
+
+# generar archivos para produccion
+ng build --prod
+
+# archivos angular
+*tsconfig.json: configuracion de typescrip
+*karma.conf.js: para realizar pruebas
+
+
+# comentarios angular
+*los CommonModule solo se llaman una sola vez
+*los AngularMaterial solo se llaman una sola vez
+*los servicios funcionan como un singlenton donde se va a mantener y llamar la informacion cuando sea necesario
+*los servicios solo se va llamar cuando cuando sea neceario (se llame en el constructor)
+# en el proyecto de auth y heroes hay un login, en base al acceso correcto recien se va a cargar los components correspondientes(carga perezosa)
+
+
+# comentarios html
+* (Submit)="agregar($event)" o (ngSubmit)="agregar()" para no recargar toda la pagina al momento de realizar un submit
+* para usar los ngSumit se importa: FormsModule
+* [(ngModel)]: muestra dato al html y envia dato al typescripts
+
+
+# realizar un seguimiento 
+1.- debugger;
+2.- f5: elegir google chrom
+3.- cambia el puerto
+4.- volve a ejecutar con el f5
+
+# generar los archivos para produccion
+1.- ng build --prod
+2.- https://www.netlify.com/
+3.- UNIverso1*
+
+# url para obtener los servicios de fotos
+1.- ingredar a la url: https://giphy.com/ o https://developers.giphy.com/dashboard/
+2.- UNIverso1*
+3.- elegimos api(postman)
+4.- generarmos un token: QbObxvzzAVMn6Q26L1ITyZQRIzSgWjol
+
+# url para pasar de response a interface
+https://quicktype.io/
+
+# url de servicios de los paises
+https://restcountries.eu/
+
+# ruta para las animaciones
+https://animate.style/
+
+# instalar primeNG en angular
+
+1.- ingresar a la pagina
+https://www.primefaces.org/primeng/
+
+2.- npm install primeng --save
+3.- npm install primeicons --save
+4.- modificar el archivo angular.json en styles:[] para usar los estilos de primeNG:
+"src/styles.css",
+"node_modules/primeicons/primeicons.css",
+"node_modules/primeng/resources/themes/saga-blue/theme.css", 
+"node_modules/primeng/resources/primeng.min.css",
+"node_modules/primeflex/primeflex.css"
+
+5.- free themes, el "node_modules/primeng/resources/themes/saga-blue/theme.css" se puede cambiar a otro temas
+6.- para usar el flex en primeNG
+npm install primeflex --save
+
+7. modificar el archivo angular.json en styles:[] agregamos el flex 
+"node_modules/primeflex/primeflex.css"
+
+8.- solo si se usa tablas en primeNG son necesarios
+npm install @angular/cdk --save
+
+# instalar angular material
+
+1.- ng add @angular/material
+2.- modificar el archivo angular.json en styles:[] para usar los estilos de angular material:
+"./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+3.- para usar el flex en angular material
+npm i @angular/flex-layout
+npm i -s @angular/flex-layout @angular/cdk
+
+
+# trabajar con server 
+1.- https://www.npmjs.com/package/json-server
+2.- npm i -g json-server
+3.- descargamos algun json con datos
+4.-nos ubicams en la carpeta donde se encuentra la data ejecutamos el siguiente comando
+json-server --watch db.json
+
+# transformar el response de un servicio en interface
+https://app.quicktype.io/
+
+
+# mapBox
+1.- https://www.mapbox.com/install/js/
+2.- npm install mapbox-gl --save
+3.- agregar en el html 
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+4.- token 
+pk.eyJ1IjoiY2hyaXN0aWFuanVzc2V0IiwiYSI6ImNrczU1NXlobzAxa2oybmxoamlnd3dqNDIifQ.ovtPPnvxP45LYe5nUHoeLQ
+
+
+#graficos
+https://valor-software.com/ng2-charts/
+
+npm install --save ng2-charts
+npm install --save chart.js
+
+* las versiones que si funcionan en Angular son:
+npm install chart.js@2.9.3 --save
+npm install ng2-charts@2.2.3 --save
+
+# instalar sweetalert2
+npm install sweetalert2
+
+
+#integrar el servicio de google sign en la pagina front
+
+1.-https://developers.google.com/identity/sign-in/web/sign-in
+2.- creamos nueva credenciales
+https://console.cloud.google.com/apis/credentials?pli=1&project=auth0gmail&folder=&organizationId=
+
+GOOGLE_CLIENT_ID = 68597836467-f059jpm30hrps4bfq7k7290ecgf2u8li.apps.googleusercontent.com
+
+GOOGLE_SECRECT_ID = 54Lu-uD4gjloOiROI3F-INtF
+3.- configuramos en el backend
+https://developers.google.com/identity/sign-in/web/backend-auth
+
